@@ -5,7 +5,7 @@
   <meta name="generator" content="Hexo 5.4.2">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
   <meta charset="utf-8">
-  
+  <meta name="robots" content="noindex,follow">
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
@@ -20,22 +20,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>HashTable - Glonh's blog</title>
+  <title>标签：-算法题 -MySql - Glonh's blog</title>
 
   
-    <meta name="description" content="哈希表也称散列表，英文名Hash table。  哈希表是根据关键码的值而直接进行访问的数据结构。  “数组就是一张哈希表” ：数组的索引下标就对应哈希表中的关键码，通过下标直接访问数组中的元素。 作用：一般哈希表都是用来快速判断一个元素是否出现集合里。 例如要查询一个名字是否在这所学校里。 要枚举的话时间复杂度是O(n)，但如果使用哈希表的话， 只需要O(1)就可以做到。 我们只需要初始化把这所">
-<meta property="og:type" content="article">
-<meta property="og:title" content="HashTable">
-<meta property="og:url" content="http://example.com/2023/02/08/HashTable/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Glonh&#39;s blog">
+<meta property="og:url" content="http://example.com/tags/%E7%AE%97%E6%B3%95%E9%A2%98-MySql/index.html">
 <meta property="og:site_name" content="Glonh&#39;s blog">
-<meta property="og:description" content="哈希表也称散列表，英文名Hash table。  哈希表是根据关键码的值而直接进行访问的数据结构。  “数组就是一张哈希表” ：数组的索引下标就对应哈希表中的关键码，通过下标直接访问数组中的元素。 作用：一般哈希表都是用来快速判断一个元素是否出现集合里。 例如要查询一个名字是否在这所学校里。 要枚举的话时间复杂度是O(n)，但如果使用哈希表的话， 只需要O(1)就可以做到。 我们只需要初始化把这所">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/Users/jianggaolong/Library/Application%20Support/typora-user-images/image-20230208160249362.png">
-<meta property="article:published_time" content="2023-02-08T07:52:41.000Z">
-<meta property="article:modified_time" content="2023-02-08T08:13:05.898Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/Users/jianggaolong/Library/Application%20Support/typora-user-images/image-20230208160249362.png">
   
   
 
@@ -62,10 +56,8 @@
   
 
 
-
-
   <div class='l_body' id='start'>
-    <aside class='l_left' layout='post'>
+    <aside class='l_left' layout=''>
     
 
   
@@ -79,59 +71,37 @@
 <div class="widgets">
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">HashTable</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E8%A1%A8"><span class="toc-text">哈希表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E5%87%BD%E6%95%B0"><span class="toc-text">哈希函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%93%88%E5%B8%8C%E7%A2%B0%E6%92%9E"><span class="toc-text">哈希碰撞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8B%89%E9%93%BE%E6%B3%95%EF%BC%9A"><span class="toc-text">拉链法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E6%B3%95"><span class="toc-text">线性探测法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div></widget>
-
-
+<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/02/08/leetcode-511-%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E5%88%86%E6%9E%90I/"><span class="title">leetcode-511:游戏玩法分析I</span></a><a class="item title" href="/2023/02/08/HashTable/"><span class="title">HashTable</span></a><a class="item title" href="/2023/02/08/hello-world/"><span class="title">Hello World</span></a></div></widget>
 
 
 </div>
 
 
     </aside>
-    <div class='l_main'>
+    <div class='l_main list'>
+      
+  
+
+<header class="header mobile-only"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Glonh's blog</div><div class="sub cap">Student from BUPT</div></a></div></header>
+
+
+
       
 
-      
+  
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-02-08T07:52:41.000Z">2023-02-08</time></div></div>
+  
 
-<article class='md-text content post'>
-<h1 class="article-title"><span>HashTable</span></h1>
-<h2 id="哈希表"><a href="#哈希表" class="headerlink" title="哈希表"></a>哈希表</h2><p>也称散列表，英文名Hash table。</p>
-<blockquote>
-<p>哈希表是根据关键码的值而直接进行访问的数据结构。</p>
-</blockquote>
-<p>“数组就是一张哈希表” ：数组的索引下标就对应哈希表中的关键码，通过下标直接访问数组中的元素。</p>
-<p><strong>作用</strong>：<strong>一般哈希表都是用来快速判断一个元素是否出现集合里。</strong></p>
-<p>例如要查询一个名字是否在这所学校里。</p>
-<p>要枚举的话时间复杂度是O(n)，但如果使用哈希表的话， 只需要O(1)就可以做到。</p>
-<p>我们只需要初始化把这所学校里学生的名字都存在哈希表里，在查询的时候通过索引直接就可以知道这位同学在不在这所学校里了。</p>
-<p>将学生姓名映射到哈希表上就涉及到了<strong>hash function ，也就是哈希函数</strong>。</p>
-<h2 id="哈希函数"><a href="#哈希函数" class="headerlink" title="哈希函数"></a>哈希函数</h2><p>将学生姓名直接映射为哈希表上的索引，通过查询索引下标<strong>快速</strong>判断学生是否在学校里。</p>
-<img class="lazy" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/Users/jianggaolong/Library/Application Support/typora-user-images/image-20230208160249362.png" alt="image-20230208160249362" style="zoom:50%;" />
+<div class="nav-wrap"><nav class="sub post cap"><a href="/">近期发布</a><a href="/categories">分类</a><a class="active" href="/tags">标签：-算法题 -MySql</a><a href="/archives">归档</a></nav></div>
 
-<p>如果hashCode值大于tableSize，就对其取模，如果学生数量大于哈希表大小，会导致几位学生的名字同时影射到哈希表的同一个索引下标的位置。</p>
-<h2 id="哈希碰撞"><a href="#哈希碰撞" class="headerlink" title="哈希碰撞"></a>哈希碰撞</h2><p>小王和小李都映射到了索引下标1的位置成为<strong>哈希碰撞</strong>（Collisions）。</p>
-<p>一般通过拉链法与线性探测法解决。</p>
-<h4 id="拉链法："><a href="#拉链法：" class="headerlink" title="拉链法："></a>拉链法：</h4><p>两个元素都被存在索引1的位置上，存储在链表中，由此可以通过索引找到两个元素。</p>
-<p>“其实拉链法就是要选择适当的哈希表的大小，这样既不会因为数组空值而浪费大量内存，也不会因为链表太长而在查找上浪费太多时间。”</p>
-<h4 id="线性探测法"><a href="#线性探测法" class="headerlink" title="线性探测法"></a>线性探测法</h4><p>保证哈希表大小（tableSize）大于数据规模（dataSize）。依靠哈希表中的空位来解决碰撞问题。</p>
-<p>“例如冲突的位置，放了小李，那么就向下找一个空位放置小王的信息。所以要求tableSize一定要大于dataSize。”</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>用处：快所安段一个元素是否出现在集合里</p>
-<p>弊端：牺牲空间换取时间（要使用额外的数组、set或者map来存放数据）</p>
+  <div class="post-list post"><a class="post-card post " href="/2023/02/08/leetcode-511-%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E5%88%86%E6%9E%90I/">
+<article class="md-text"><h2 class="post-title">leetcode-511:游戏玩法分析I</h2><div class="excerpt"><p>题目描述：
+写一条 SQL 查询语句获取每位玩家 第一次登陆平台的日期。
 
-
-<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
-</div></section></div>
-
-</article>
-
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/02/08/leetcode-511-%E6%B8%B8%E6%88%8F%E7%8E%A9%E6%B3%95%E5%88%86%E6%9E%90I/">leetcode-511:游戏玩法分析I</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/02/08/hello-world/">Hello World</a></div></section></div>
-
-
-
+https://leetcode.cn/problems/game-play-analysis-i/solution/liang-chong-jie-ti-si-lu-by-uccs-5gpc/</p></div><div class="meta cap"><span class="cap" id="post-meta">发布于&nbsp;<time datetime="2023-02-08T09:07:03.000Z">2023-02-08</time></span><span class="cap breadcrumb">-数据库</span></div></article>
+</a></div>
+  
 
 
 
