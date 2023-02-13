@@ -33,7 +33,7 @@
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230210101646807.png">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213092515269.png">
 <meta property="article:published_time" content="2023-02-09T01:30:10.000Z">
-<meta property="article:modified_time" content="2023-02-13T01:36:09.909Z">
+<meta property="article:modified_time" content="2023-02-13T02:53:46.084Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta property="article:tag" content="wifi sensing">
 <meta property="article:tag" content="posing">
@@ -133,8 +133,55 @@
 </li>
 <li><p>Embedding layer:</p>
 <ul>
-<li>$u &#x3D; \psi (u_{rf}\oplus u_{flr})$<br>$$<br>u &#x3D; \psi (u_{rf}\oplus u_{flr})<br>$$</li>
+<li><p>$u &#x3D; \psi (u_{rf}\oplus u_{flr})$<br>$$<br>u &#x3D; \psi (u_{rf}\oplus u_{flr})<br>$$</p>
+</li>
+<li><p>$\psi$指的是2层全连接</p>
+</li>
 </ul>
+</li>
+</ul>
+</li>
+<li><p>特征对齐：</p>
+<ul>
+<li><p>对齐方法：先采一对<code>RF+floormap</code>特征与RGB视频作为配对数据（<strong>具有相同的语义</strong>），然后利用配对视频与现有的视频字幕数据集中视频<strong>具有相同模态</strong>的特点，建立桥梁，一起训练；</p>
+</li>
+<li><p>具体实施：分别训练有（<code>RF+Floormap</code>）配对数据集和无（<code>RF+Floormap</code>）配对数据集的视频字幕模型，然后迁移，但因为特征分布不同，会过拟合，所以利用两个特征分布相似来解决（视频编码阶段提取两种特征Mixed_5c与空间平均池化后的特征），表现在<code>loss</code>上就是：<br>$$<br>\begin{aligned}<br>\mathcal{L}&#x3D; &amp; \mathcal{L}<em>{\text {cap }}\left(\mathbf{u}^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^U\right) \<br>&amp; +\mathcal{L}</em>{\text {pair }}\left(\mathbf{u}^P, \mathbf{v}<em>n^P\right) \<br>&amp; +\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_n^P, \mathbf{v}<em>n^U\right)+\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_m^P, \mathbf{v}_m^U\right) .<br>\end{aligned}<br>$$</p>
+</li>
+<li><p>1</p>
+</li>
+</ul>
+</li>
+<li><p>实验：</p>
+<ul>
+<li><p>数据集：RF Captioning Dataset（<code>synchronized RF signals</code>, <code>RGB videos</code>, <code>floormaps</code>, <code>human-labeled captions</code>）</p>
+</li>
+<li><p>floormaps：cabinet, table, bed, wardrobe, shelf, drawer, stove, fridge, sink, sofa, television, door, window, air conditioner, bathtub, dishwasher, oven, bedside table</p>
+<table>
+<thead>
+<tr>
+<th>#environments</th>
+<th>#clips</th>
+<th>avg len</th>
+<th>#action types</th>
+<th>#object types</th>
+<th>#sentences</th>
+<th>#words</th>
+<th>vocab</th>
+<th>len</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10</td>
+<td>1035</td>
+<td>31.3s</td>
+<td>157</td>
+<td>38</td>
+<td>3610</td>
+<td>77762</td>
+<td>6910</td>
+<td>8.99hrs</td>
+</tr>
+</tbody></table>
 </li>
 </ul>
 </li>
