@@ -23,19 +23,19 @@
   <title>RF-diary - Glonh's blog</title>
 
   
-    <meta name="description" content="目的：通过无线信号描述人的活动以及与物品的交互。 creating a system that observes people at home, and automatically generates a transcript of their everyday life 创新点&#x2F;方法： 训练阶段将家庭平面图（标记家具等静态物体的大小和位置）输入网络中 将RF-diary提取到的特征与现">
+    <meta name="description" content="目的：通过无线信号描述人的活动以及与物品的交互。  creating a system that observes people at home, and automatically generates a transcript of their everyday life。  创新点&#x2F;方法： 训练阶段将家庭平面图（标记家具等静态物体的大小和位置）输入网络中 将RF-diary提取到的特">
 <meta property="og:type" content="article">
 <meta property="og:title" content="RF-diary">
 <meta property="og:url" content="http://example.com/2023/02/09/RF-diary/index.html">
 <meta property="og:site_name" content="Glonh&#39;s blog">
-<meta property="og:description" content="目的：通过无线信号描述人的活动以及与物品的交互。 creating a system that observes people at home, and automatically generates a transcript of their everyday life 创新点&#x2F;方法： 训练阶段将家庭平面图（标记家具等静态物体的大小和位置）输入网络中 将RF-diary提取到的特征与现">
+<meta property="og:description" content="目的：通过无线信号描述人的活动以及与物品的交互。  creating a system that observes people at home, and automatically generates a transcript of their everyday life。  创新点&#x2F;方法： 训练阶段将家庭平面图（标记家具等静态物体的大小和位置）输入网络中 将RF-diary提取到的特">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230210101646807.png">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213092515269.png">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213105734665.png">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213110202332.png">
 <meta property="article:published_time" content="2023-02-09T01:30:10.000Z">
-<meta property="article:modified_time" content="2023-02-13T03:23:41.139Z">
+<meta property="article:modified_time" content="2023-02-13T07:30:33.008Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta property="article:tag" content="wifi sensing">
 <meta property="article:tag" content="posing">
@@ -112,7 +112,9 @@
 <article class='md-text content post'>
 <h1 class="article-title"><span>RF-diary</span></h1>
 <h4 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h4><p>通过无线信号描述人的活动以及与物品的交互。</p>
-<p>creating a system that observes people at home, and automatically generates a transcript of their everyday life</p>
+<blockquote>
+<p>creating a system that observes people at home, and automatically generates a transcript of their everyday life。</p>
+</blockquote>
 <h4 id="创新点-x2F-方法："><a href="#创新点-x2F-方法：" class="headerlink" title="创新点&#x2F;方法："></a>创新点&#x2F;方法：</h4><ul>
 <li>训练阶段将家庭平面图（标记家具等静态物体的大小和位置）输入网络中</li>
 <li>将<code>RF-diary</code>提取到的特征与现有的视频字幕模型的特征对其到相同的空间</li>
@@ -152,11 +154,34 @@
 </li>
 <li><p>特征对齐：</p>
 <ul>
-<li><p>对齐方法：先采一对<code>RF+floormap</code>特征与RGB视频作为配对数据（<strong>具有相同的语义</strong>），然后利用配对视频与现有的视频字幕数据集中视频<strong>具有相同模态</strong>的特点，建立桥梁，一起训练；</p>
+<li><p>对齐方法：先采一对<code>RF+floormap</code>特征与RGB视频作为配对数据（<strong>具有相同的语义</strong>），然后利用配对视频与现有的视频字幕数据集中视频<strong>具有相同模态</strong>的特点，建立桥梁；</p>
 </li>
-<li><p>具体实施：分别训练有（<code>RF+Floormap</code>）配对数据集和无（<code>RF+Floormap</code>）配对数据集的视频字幕模型，然后迁移，但因为特征分布不同，会过拟合，所以利用两个特征分布相似来解决（视频编码阶段提取两种特征Mixed_5c与空间平均池化后的特征），表现在<code>loss</code>上就是：<br>$$<br>\begin{aligned}<br>\mathcal{L}&#x3D; &amp; \mathcal{L}<em>{\text {cap }}\left(\mathbf{u}^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^U\right) \<br>&amp; +\mathcal{L}</em>{\text {pair }}\left(\mathbf{u}^P, \mathbf{v}<em>n^P\right) \<br>&amp; +\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_n^P, \mathbf{v}<em>n^U\right)+\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_m^P, \mathbf{v}_m^U\right) .<br>\end{aligned}<br>$$</p>
+<li><p>具体实施：将有（<code>RF+Floormap</code>）配对的数据和无（<code>RF+Floormap</code>）配对数据混在一起训练一个视频字幕模型，然后迁移，但因为特征分布不同，会过拟合，所以利用让两个特征分布相似来解决（视频编码阶段提取两种特征Mixed_5c与空间平均池化后的特征），表现在<code>loss</code>上就是：<br>$$<br>\begin{aligned}<br>\mathcal{L}&#x3D; &amp; \mathcal{L}<em>{\text {cap }}\left(\mathbf{u}^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^P\right)+\mathcal{L}</em>{\text {cap }}\left(\mathbf{v}<em>n^U\right) \<br>&amp; +\mathcal{L}</em>{\text {pair }}\left(\mathbf{u}^P, \mathbf{v}<em>n^P\right) \<br>&amp; +\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_n^P, \mathbf{v}<em>n^U\right)+\mathcal{L}</em>{\text {unpair }}\left(\mathbf{v}_m^P, \mathbf{v}_m^U\right) .<br>\end{aligned}<br>$$</p>
 </li>
-<li><p>1</p>
+<li><p>Loss：</p>
+<ul>
+<li>Lcap：针对的是字幕生成模型，第一个为最终目标，后两个应该是在混合训练的时候优化了；</li>
+<li>Lpair：针对的是<em>embedding layer</em>（maybe），让提取到的特征与具有相同语义的视频有最小的分布差；</li>
+<li><em>Lunpair：针对的是视频数据之间的分布差，不懂这个loss是怎么参与网络优化的</em></li>
+</ul>
+</li>
+<li><p>怎么训练的&#x2F;优化的到底是啥？</p>
+<ul>
+<li>猜想1（整体训练）:<ol>
+<li>事先训练好特征提取网络、视频编码网络</li>
+<li>（混合）视频数据训练出来的视频字幕模型</li>
+<li>以3+1+2个loss最小为目标，不断优化captioning generation网络（基于注意力机制的LSTM模型）</li>
+<li>但是这样训练，视频都已经用过了</li>
+</ol>
+</li>
+<li>猜想2：<ol>
+<li>未训练的特征提取网络</li>
+<li>（混合）视频数据预训练出来的视频字幕模型</li>
+<li></li>
+</ol>
+</li>
+<li>Question：输入的数据集应该是对应的rf+video+描述，得到一个能根据rf生成字幕的（或许是用混合数据预训练的）模型，然后对骨架编码器、floormap编码器、embedding层、</li>
+</ul>
 </li>
 </ul>
 </li>
@@ -214,8 +239,12 @@
 <li>可见场景中与视频字幕模型效果相当（41.5 BLEU + 26.7 CIDEr VS 41.1 BLEU + 27.0 CIDEr）</li>
 <li>遮蔽与黑暗场景效果依旧</li>
 </ul>
-<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><h4 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h4><ul>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><ul>
+<li>多模态应用的思想：找到媒介，然后全部对齐</li>
+</ul>
+<h4 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h4><ul>
 <li>家具不能动</li>
+<li>采集原始数据比较困难</li>
 </ul>
 <h4 id="启示："><a href="#启示：" class="headerlink" title="启示："></a>启示：</h4>
 
