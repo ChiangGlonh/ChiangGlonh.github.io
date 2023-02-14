@@ -35,7 +35,7 @@
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213105734665.png">
 <meta property="og:image" content="http://example.com/2023/02/09/RF-diary/image-20230213110202332.png">
 <meta property="article:published_time" content="2023-02-09T01:30:10.000Z">
-<meta property="article:modified_time" content="2023-02-13T07:30:33.008Z">
+<meta property="article:modified_time" content="2023-02-13T10:46:39.988Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta property="article:tag" content="wifi sensing">
 <meta property="article:tag" content="posing">
@@ -165,22 +165,27 @@
 <li><em>Lunpair：针对的是视频数据之间的分布差，不懂这个loss是怎么参与网络优化的</em></li>
 </ul>
 </li>
-<li><p>怎么训练的&#x2F;优化的到底是啥？</p>
+<li><p>困惑：</p>
 <ul>
-<li>猜想1（整体训练）:<ol>
-<li>事先训练好特征提取网络、视频编码网络</li>
-<li>（混合）视频数据训练出来的视频字幕模型</li>
-<li>以3+1+2个loss最小为目标，不断优化captioning generation网络（基于注意力机制的LSTM模型）</li>
-<li>但是这样训练，视频都已经用过了</li>
+<li>用混合的视频数据训练了一个视频字幕生成模型，迁移下来时候，不就是输入带RF的数据集嘛，咋实现对两套视频数据分布差缩小的优化的（第三行unpair的loss），or实现之后又怎么反馈到其他部分啊？是在训练视频编码器的时候就做吗？但是在5.1中说他是直接用的别人训练好的模型提取视频特征。</li>
+</ul>
+</li>
+<li><p><del>怎么训练的&#x2F;优化的到底是啥？</del></p>
+<ul>
+<li><del>猜想1（整体训练）:</del><ol>
+<li><del>事先训练好特征提取网络、视频编码网络</del></li>
+<li><del>（混合）视频数据训练出来的视频字幕模型</del></li>
+<li><del>以3+1+2个loss最小为目标，不断优化captioning generation网络（基于注意力机制的LSTM模型）</del></li>
+<li><del>但是这样训练，视频都已经用过了</del></li>
 </ol>
 </li>
-<li>猜想2：<ol>
-<li>未训练的特征提取网络</li>
-<li>（混合）视频数据预训练出来的视频字幕模型</li>
+<li><del>猜想2：</del><ol>
+<li><del>未训练的特征提取网络</del></li>
+<li><del>（混合）视频数据预训练出来的视频字幕模型</del></li>
 <li></li>
 </ol>
 </li>
-<li>Question：输入的数据集应该是对应的rf+video+描述，得到一个能根据rf生成字幕的（或许是用混合数据预训练的）模型，然后对骨架编码器、floormap编码器、embedding层、</li>
+<li><del>Question：输入的数据集应该是对应的rf+video+描述，得到一个能根据rf生成字幕的（或许是用混合数据预训练的）模型，然后对骨架编码器、floormap编码器、embedding层、</del></li>
 </ul>
 </li>
 </ul>
