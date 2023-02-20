@@ -20,22 +20,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>leetcode-242:有效的字母异位词 - Glonh's blog</title>
+  <title>Winect - Glonh's blog</title>
 
   
-    <meta name="description" content="题目描述 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。">
+    <meta name="description" content="2018-Ubicom">
 <meta property="og:type" content="article">
-<meta property="og:title" content="leetcode-242:有效的字母异位词">
-<meta property="og:url" content="http://example.com/2023/02/18/leetcode-242-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/index.html">
+<meta property="og:title" content="Winect">
+<meta property="og:url" content="http://example.com/2023/02/20/Winect/index.html">
 <meta property="og:site_name" content="Glonh&#39;s blog">
-<meta property="og:description" content="题目描述 给定两个字符串 s 和 t ，编写一个函数来判断 t 是否是 s 的字母异位词。">
+<meta property="og:description" content="2018-Ubicom">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2023-02-18T13:18:32.000Z">
-<meta property="article:modified_time" content="2023-02-18T13:34:31.279Z">
+<meta property="og:image" content="http://example.com/2023/02/20/Winect/image-20230220182125301.png">
+<meta property="article:published_time" content="2023-02-20T07:36:43.000Z">
+<meta property="article:modified_time" content="2023-02-20T10:23:19.946Z">
 <meta property="article:author" content="Glonh Chiang">
-<meta property="article:tag" content="算法题">
-<meta property="article:tag" content="哈希">
+<meta property="article:tag" content="wifi sensing">
+<meta property="article:tag" content="pose">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/02/20/Winect/image-20230220182125301.png">
   
   
 
@@ -84,7 +86,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">leetcode-242:有效的字母异位词</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%8F%8F%E8%BF%B0"><span class="toc-text">输入描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1"><span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div></widget>
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">Winect</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%AE%E7%9A%84"><span class="toc-text">目的</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%9B%E6%96%B0%E7%82%B9-x2F-%E6%96%B9%E6%B3%95%EF%BC%9A"><span class="toc-text">创新点&#x2F;方法：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E8%AE%A1%EF%BC%9A"><span class="toc-text">实验设计：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B3%E8%8A%82%E7%82%B9%E5%88%86%E8%A7%A3%EF%BC%9A-%E7%82%B9%E4%BA%91%E6%A8%A1%E5%9E%8B%EF%BC%8C%E6%B7%B1%E5%BA%A6%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E8%82%A2%E4%BD%93%E4%BD%8D%E7%BD%AE%E7%82%B9%E4%BA%91%E5%92%8C%E5%85%B3%E8%8A%82%E7%82%B9%E4%BD%8D%E7%BD%AE%E7%82%B9%E4%BA%91%E7%9A%84%E5%85%B3%E7%B3%BB-%E5%85%B3%E4%BA%8E%E8%82%A2%E4%BD%93%E5%AD%A6%E8%BF%90%E5%8A%A8%E7%9A%84balabala"><span class="toc-text">关节点分解：- 点云模型，深度网络学习肢体位置点云和关节点位置点云的关系- 关于肢体学运动的balabala</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BA%94%E7%94%A8%EF%BC%9A"><span class="toc-text">应用：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA%EF%BC%9A"><span class="toc-text">结论：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="toc-text">总结：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BC%BA%E9%99%B7%EF%BC%9A"><span class="toc-text">缺陷：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%AF%E7%A4%BA%EF%BC%9A"><span class="toc-text">启示：</span></a></li></ol></div></div></widget>
 
 
 
@@ -99,52 +101,52 @@
       
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-02-18T13:18:32.000Z">2023-02-18</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-02-20T07:36:43.000Z">2023-02-20</time></div></div>
 
 <article class='md-text content post'>
-<h1 class="article-title"><span>leetcode-242:有效的字母异位词</span></h1>
-<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
-<p>给定两个字符串 <code>s</code> 和 <code>t</code> ，编写一个函数来判断 <code>t</code> 是否是 <code>s</code> 的字母异位词。</p>
-</blockquote>
+<h1 class="article-title"><span>Winect</span></h1>
+<p>2018-Ubicom</p>
 <span id="more"></span>
 
 
 
-<h4 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h4><blockquote>
-<p>给定字符串只有小写字母（意思就是表长只有26就可以了，ASCII值也是连续的）</p>
-</blockquote>
-<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><blockquote>
-<p>输入</p>
+<h4 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h4><p>自由活动跟踪</p>
 <blockquote>
-<p><code>s</code> &#x3D; <code>&quot;anagram&quot;</code>, <code>t</code> &#x3D; <code>&quot;nagaram&quot;</code></p>
+<p>与环境、人、位置无关，在各种环境下实现厘米级的<strong>自由活动</strong>跟踪。</p>
 </blockquote>
-</blockquote>
-<blockquote>
-<p>输出</p>
-<blockquote>
-<p><code>true</code></p>
-</blockquote>
-</blockquote>
-<p>示例2</p>
-<blockquote>
-<p>输入</p>
-<blockquote>
-<p><code>s</code> &#x3D; <code>&quot;rat&quot;</code>,<code>t</code> &#x3D; <code>&quot;car&quot;</code></p>
-</blockquote>
-</blockquote>
-<blockquote>
-<p>输出</p>
-<blockquote>
-<p><code>false</code></p>
-</blockquote>
-</blockquote>
-<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>首先判断两个字符串长度一样不，不一样直接return，一样的话再创建一个26长度的哈希表（此处用数组就行了），一块遍历两个字符串，根据ASCII值决定在表中的位置，一个加一个减，最后表中全0代表一样了</p>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">isAnagram</span><span class="params">(String s, String t)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(s.length() != t.length())</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">int</span>[] alpha = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">26</span>];</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i&lt; s.length(); i++) &#123;</span><br><span class="line">            alpha[s.charAt(i) - <span class="string">&#x27;a&#x27;</span>] ++;</span><br><span class="line">            alpha[t.charAt(i) - <span class="string">&#x27;a&#x27;</span>] --;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>;i&lt;<span class="number">26</span>;i++)</span><br><span class="line">            <span class="keyword">if</span>(alpha[i] != <span class="number">0</span>)</span><br><span class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>第一次做哈希映射的题，继续加油吧</li>
+<h4 id="创新点-x2F-方法："><a href="#创新点-x2F-方法：" class="headerlink" title="创新点&#x2F;方法："></a>创新点&#x2F;方法：</h4><ul>
+<li>肢体识别（基于AoA）：盲源分离与移动肢体的识别  -&gt;  得到轨迹</li>
+<li>利用运动学模型，从多个运动的肢体分解关节点</li>
+<li>WiPose只适用于预定义的活动（WiMose变成了可以动的，但还是预定义的）</li>
+</ul>
+<p>盲源分离识别动的躯干，</p>
+<h4 id="实验设计："><a href="#实验设计：" class="headerlink" title="实验设计："></a>实验设计：</h4><p>设备：一发（2ant）三收（3ant）</p>
+<ol>
+<li>识别移动肢体：<ul>
+<li>L型接收天线阵列 -&gt; 二维到达角估计</li>
+<li>谱减法 -&gt; 去除环境噪声（人站在原地不动）</li>
+<li>根据方位角和俯仰角谱的峰值确定运动肢体的个数（用一百个packet来非参聚类），根据识别到的角度可以根据先验知识确定是哪个肢体</li>
+</ul>
+</li>
+<li>分离运动肢体信号：<ul>
+<li>找到最敏感的子载波对（movement energy ratio）</li>
+<li>盲源分离（懒得看下面的了，很复杂，用不太到）</li>
+</ul>
+</li>
+<li><h2 id="关节点分解：-点云模型，深度网络学习肢体位置点云和关节点位置点云的关系-关于肢体学运动的balabala"><a href="#关节点分解：-点云模型，深度网络学习肢体位置点云和关节点位置点云的关系-关于肢体学运动的balabala" class="headerlink" title="关节点分解：- 点云模型，深度网络学习肢体位置点云和关节点位置点云的关系- 关于肢体学运动的balabala"></a>关节点分解：<br>- 点云模型，深度网络学习肢体位置点云和关节点位置点云的关系<br>- 关于肢体学运动的balabala</h2></li>
+</ol>
+<h4 id="应用："><a href="#应用：" class="headerlink" title="应用："></a>应用：</h4><h4 id="结论："><a href="#结论：" class="headerlink" title="结论："></a>结论：</h4><ul>
+<li><p>关节点估计效果：</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/02/20/Winect/image-20230220182125301.png" class="lazy" title="image-20230220182125301">
+</li>
+<li><p>跨环境效果：几乎不受环境同样影响，但暗的时候效果不好，不知道为啥，差了大概40%</p>
+</li>
+<li><p>肢体识别的准确率：98.5%</p>
+</li>
+</ul>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><h4 id="缺陷："><a href="#缺陷：" class="headerlink" title="缺陷："></a>缺陷：</h4><h4 id="启示："><a href="#启示：" class="headerlink" title="启示："></a>启示：</h4><ul>
+<li>盲源分流有点扯淡，但去除环境分量的方法值得学习</li>
+<li>只学习肢体位置和关节点的关系，这样也可以从根本上解决客观依赖</li>
 </ul>
 
 
@@ -153,7 +155,7 @@
 
 </article>
 
-<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"><div class="note">较新文章</div><a href="/2023/02/20/Winect/">Winect</a></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/02/18/leetcode-160-%E7%9B%B8%E4%BA%A4%E9%93%BE%E8%A1%A8/">leetcode-160:相交链表</a></div></section></div>
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/02/18/leetcode-242-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/">leetcode-242:有效的字母异位词</a></div></section></div>
 
 
 
