@@ -5,7 +5,7 @@
   <meta name="generator" content="Hexo 5.4.2">
   <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
   <meta charset="utf-8">
-  <meta name="robots" content="none">
+  
 
   <meta http-equiv='x-dns-prefetch-control' content='on' />
   <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
@@ -20,16 +20,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="theme-color" content="#f8f8f8">
   
-  <title>Glonh's blog</title>
+  <title>leetcode-142-环形链表II - Glonh's blog</title>
 
   
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Glonh&#39;s blog">
-<meta property="og:url" content="http://example.com/404.html">
+    <meta name="description" content="题目描述 给定一个链表的头节点 head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="leetcode-142-环形链表II">
+<meta property="og:url" content="http://example.com/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/index.html">
 <meta property="og:site_name" content="Glonh&#39;s blog">
+<meta property="og:description" content="题目描述 给定一个链表的头节点 head ，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/image-20230227142943002.png">
+<meta property="og:image" content="http://example.com/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/image-20230227143046487.png">
+<meta property="article:published_time" content="2023-02-27T06:17:41.000Z">
+<meta property="article:modified_time" content="2023-02-27T06:38:48.553Z">
 <meta property="article:author" content="Glonh Chiang">
+<meta property="article:tag" content="算法题">
+<meta property="article:tag" content="链表">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/image-20230227142943002.png">
   
   
 
@@ -60,50 +69,119 @@
   
 
 
+
+
   <div class='l_body' id='start'>
-    <aside class='l_left' layout='404'>
+    <aside class='l_left' layout='post'>
     
 
   
 
 <header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Glonh's blog</div><div class="sub cap">Student from BUPT</div></a></div>
 
-<nav class="menu dis-select"><a class="nav-item" href="/">博客</a><a class="nav-item" href="/about/">关于</a></nav>
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/about/">关于</a></nav>
 </header>
 
 
 <div class="widgets">
-<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" placeholder="站内搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/"><span class="title">leetcode-142-环形链表II</span></a><a class="item title" href="/2023/02/10/leetcode-209-%E9%95%BF%E5%BA%A6%E6%9C%80%E5%B0%8F%E7%9A%84%E5%AD%90%E6%95%B0%E7%BB%84/"><span class="title">leetcode-209:长度最小的子数组</span></a><a class="item title" href="/2023/02/20/Winect/"><span class="title">Winect</span></a><a class="item title" href="/2023/02/09/RF-diary/"><span class="title">RF-diary</span></a><a class="item title" href="/2023/02/18/leetcode-242-%E6%9C%89%E6%95%88%E7%9A%84%E5%AD%97%E6%AF%8D%E5%BC%82%E4%BD%8D%E8%AF%8D/"><span class="title">leetcode-242:有效的字母异位词</span></a></div></widget>
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">leetcode-142-环形链表II</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="toc-text">题目描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E6%8F%8F%E8%BF%B0"><span class="toc-text">输入描述</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B1"><span class="toc-text">示例1</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%9D%E8%B7%AF"><span class="toc-text">思路</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-text">代码实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></div></div></widget>
+
+
 
 
 </div>
 
 
     </aside>
-    <div class='l_main list'>
+    <div class='l_main'>
       
 
       
-<article class='md-text error-page'>
-  <h1><img id='error' src='https://gcore.jsdelivr.net/gh/cdn-x/placeholder@1.0.4/404/1c830bfcd517d.svg' alt='404'></h1>
-  <p class='what'>
-    <strong>
-      很抱歉，您访问的页面不存在
-    </strong>
-  </p>
-  <p class='why'>
-    可能是输入地址有误或该地址已被删除
-  </p>
-  <br><br>
-  <a class='button' id='back' href="/">返回主页</a>
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-02-27T06:17:41.000Z">2023-02-27</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>leetcode-142-环形链表II</span></h1>
+<h4 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h4><blockquote>
+<p>给定一个链表的头节点 <code>head</code> ，返回链表开始入环的第一个节点。 <em>如果链表无环，则返回 <code>null</code>。</em></p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h4 id="输入描述"><a href="#输入描述" class="headerlink" title="输入描述"></a>输入描述</h4><blockquote>
+<p>如果链表中有某个节点，可以通过连续跟踪 <code>next</code> 指针再次到达，则链表中存在环。 为了表示给定链表中的环，评测系统内部使用整数 <code>pos</code> 来表示链表尾连接到链表中的位置（<strong>索引从 0 开始</strong>）。如果 <code>pos</code> 是 <code>-1</code>，则在该链表中没有环。<strong>注意：<code>pos</code> 不作为参数进行传递</strong>，仅仅是为了标识链表的实际情况。</p>
+</blockquote>
+<h4 id="示例1"><a href="#示例1" class="headerlink" title="示例1"></a>示例1</h4><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/image-20230227142943002.png" class="lazy" title="image-20230227142943002">
+
+<blockquote>
+<p>输入</p>
+<blockquote>
+<p> <code>head</code> &#x3D; [3,2,0,-4], <code>pos</code> &#x3D; 1</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>输出</p>
+<blockquote>
+<p>返回索引为<code>1</code>的链表节点</p>
+</blockquote>
+</blockquote>
+<p>示例2</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/image-20230227143046487.png" class="lazy" title="image-20230227143046487">
+
+<blockquote>
+<p>输入</p>
+<blockquote>
+<p><code>head</code> &#x3D; [1], <code>pos</code> &#x3D; -1</p>
+</blockquote>
+</blockquote>
+<blockquote>
+<p>输出</p>
+<blockquote>
+<p>null</p>
+</blockquote>
+</blockquote>
+<h4 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h4><p>首先需要判断是否存在<code>环</code>，只需要定义快慢指针，一个一次走两格，一个一次走一格，这样只要有环一定会相遇（与相交链表判断一样），接着要找环的入口。</p>
+<p>假设从头结点到环形入口节点 的节点数为<code>x</code>。 环形入口节点到 <code>fast</code>指针与<code>slow</code>指针相遇节点节点数为<code>y</code>。 从相遇节点再到环形入口节点节点数为<code>z</code>。 </p>
+<p>那么相遇时： <code>slow</code>指针走过的节点数为: <code>x + y</code>， fast指针走过的节点数：<code>x + y + n (y + z)</code>，<code>n</code>为<code>fast</code>指针在环内走了<code>n</code>圈才遇到<code>slow</code>指针，<code>（y+z）</code>为 一圈内节点的个数<code>A</code>。</p>
+<p>因为<code>fast</code>指针是一步走两个节点，<code>slow</code>指针一步走一个节点， 所以<code> fast</code>指针走过的节点数 &#x3D; <code>slow</code>指针走过的节点数 * 2：</p>
+<p><code>(x + y) * 2 = x + y + n (y + z)</code></p>
+<p>两边消掉一个<code>（x+y）</code>: <code>x + y = n (y + z)</code></p>
+<p>因为要找环形的入口，那么要求的是<code>x</code>，因为<code>x</code>表示 头结点到 环形入口节点的的距离。</p>
+<p>所以要求x ，将x单独放在左面：<code>x = n (y + z) - y</code> ,</p>
+<p>再从<code>n(y+z)</code>中提出一个 <code>（y+z）</code>来，整理公式之后为如下公式：<code>x = (n - 1) (y + z) + z</code> 注意这里n一定是大于等于1的，因为 <code>fast</code>指针至少要多走一圈才能相遇<code>slow</code>指针。</p>
+<p>所以可以看出，在快慢指针相遇时，头节点到入口的距离和相遇节点到入口的距离是一样的！</p>
+<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> ListNode <span class="title function_">detectCycle</span><span class="params">(ListNode head)</span> &#123;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">fastIndex</span> <span class="operator">=</span> head;</span><br><span class="line">        <span class="type">ListNode</span> <span class="variable">slowIndex</span> <span class="operator">=</span> head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(fastIndex != <span class="literal">null</span> &amp;&amp; fastIndex.next != <span class="literal">null</span>)&#123;</span><br><span class="line">            fastIndex = fastIndex.next.next;</span><br><span class="line">            slowIndex = slowIndex.next;</span><br><span class="line">            <span class="keyword">if</span>(fastIndex == slowIndex)&#123;</span><br><span class="line">                <span class="type">ListNode</span> <span class="variable">index1</span> <span class="operator">=</span> head;</span><br><span class="line">                <span class="type">ListNode</span> <span class="variable">index2</span> <span class="operator">=</span> slowIndex;</span><br><span class="line">                <span class="keyword">while</span> (index1 != index2)&#123;</span><br><span class="line">                    index2 = index2.next;</span><br><span class="line">                    index1 = index1.next;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">return</span> index1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
+<li><p>首先判断是否有环，利用快慢指针</p>
+</li>
+<li><p>然后可以推导出一个到入口距离相等的两个点，此时重新定义两个指针同步就可以找到了！</p>
+</li>
+</ul>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
 </article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/02/20/Winect/">Winect</a></div></section></div>
+
+
+
+
 
 
   <div class='related-wrap md-text reveal' id="comments">
     <section class='header cmt-title cap theme'>
-      
+      快来参与讨论吧
     </section>
     <section class='body cmt-body beaudar'>
       
