@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang='zh-CN'>
+
+<head>
+  <meta name="generator" content="Hexo 5.4.2">
+  <meta name="hexo-theme" content="https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5">
+  <meta charset="utf-8">
+  
+
+  <meta http-equiv='x-dns-prefetch-control' content='on' />
+  <link rel='dns-prefetch' href='https://gcore.jsdelivr.net'>
+  <link rel="preconnect" href="https://gcore.jsdelivr.net" crossorigin>
+  <link rel='dns-prefetch' href='//unpkg.com'>
+
+  <meta name="renderer" content="webkit">
+  <meta name="force-rendering" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="HandheldFriendly" content="True" >
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="theme-color" content="#f8f8f8">
+  
+  <title>pose cross environment - Glonh's blog</title>
+
+  
+    <meta name="description" content="记录一下找到的几种针对跨环境问题的姿态估计">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pose cross environment">
+<meta property="og:url" content="http://example.com/2023/03/02/pose-cross-environment/index.html">
+<meta property="og:site_name" content="Glonh&#39;s blog">
+<meta property="og:description" content="记录一下找到的几种针对跨环境问题的姿态估计">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230306100318989.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230306100237721.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230302173330078.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230302173536263.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230302173627103.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230302173749838.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230302174514915.png">
+<meta property="og:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230304111230261.png">
+<meta property="article:published_time" content="2023-03-02T09:30:55.000Z">
+<meta property="article:modified_time" content="2023-03-06T09:15:54.048Z">
+<meta property="article:author" content="Glonh Chiang">
+<meta property="article:tag" content="wifi sensing">
+<meta property="article:tag" content="posing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/2023/03/02/pose-cross-environment/image-20230306100318989.png">
+  
+  
+
+  <!-- feed -->
+  
+
+  
+    
+<link rel="stylesheet" href="/css/main.css">
+
+  
+
+  
+
+  
+
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --></head>
+
+<body>
+  
+
+
+
+
+  <div class='l_body' id='start'>
+    <aside class='l_left' layout='post'>
+    
+
+  
+
+<header class="header"><div class="logo-wrap"><a class="title" href="/"><div class="main" ff="title">Glonh's blog</div><div class="sub cap">Student from BUPT</div></a></div>
+
+<nav class="menu dis-select"><a class="nav-item active" href="/">博客</a><a class="nav-item" href="/about/">关于</a></nav>
+</header>
+
+
+<div class="widgets">
+<widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
+
+
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">pose cross environment</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A7%BF-%E6%80%81%E4%BC%B0%E8%AE%A1%E8%B7%A8%E7%8E%AF%E5%A2%83%E9%97%AE%E9%A2%98%E8%B0%83%E7%A0%94"><span class="toc-text">姿 态估计跨环境问题调研</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%BB%E5%8A%A1"><span class="toc-text">任务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%8E%B0%E6%9C%89%E7%A0%94%E7%A9%B6%E6%83%85%E5%86%B5"><span class="toc-text">现有研究情况</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Winect%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="toc-text">Winect效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Meta-Pose%E6%95%88%E6%9E%9C%EF%BC%9A"><span class="toc-text">Meta-Pose效果：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Cycle-GAN"><span class="toc-text">Cycle GAN</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%98%E9%9C%80%E8%A6%81%E7%9C%8B%E7%9A%84%EF%BC%9A"><span class="toc-text">还需要看的：</span></a></li></ol></li></ol></div></div></widget>
+
+
+
+
+</div>
+
+
+    </aside>
+    <div class='l_main'>
+      
+
+      
+
+
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E6%96%87%E7%8C%AE%E9%98%85%E8%AF%BB/">文献阅读</a></div><div id="post-meta">发布于&nbsp;<time datetime="2023-03-02T09:30:55.000Z">2023-03-02</time></div></div>
+
+<article class='md-text content post'>
+<h1 class="article-title"><span>pose cross environment</span></h1>
+<blockquote>
+<p>记录一下找到的几种针对跨环境问题的姿态估计</p>
+</blockquote>
+<span id="more"></span>
+
+
+
+<h2 id="姿-态估计跨环境问题调研"><a href="#姿-态估计跨环境问题调研" class="headerlink" title="姿 态估计跨环境问题调研"></a>姿 态估计跨环境问题调研</h2><h3 id="任务"><a href="#任务" class="headerlink" title="任务"></a>任务</h3><p>有一个或几个环境的数据</p>
+<p>在<strong>新的环境</strong>中实现相同的效果</p>
+<h3 id="现有研究情况"><a href="#现有研究情况" class="headerlink" title="现有研究情况"></a>现有研究情况</h3><table>
+<thead>
+<tr>
+<th>领域</th>
+<th>模型</th>
+<th>预处理</th>
+<th>主要方法</th>
+<th>实验</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>WiFi</td>
+<td>Winect</td>
+<td>角度谱减法</td>
+<td>识别运动肢体+盲源分离+关节点轨迹(DNN)</td>
+<td>原地运动</td>
+<td></td>
+</tr>
+<tr>
+<td>RFID</td>
+<td>Meta-Pose</td>
+<td>连续相位差+RNN</td>
+<td>meta learning + fine tuning</td>
+<td>原地运动</td>
+<td></td>
+</tr>
+<tr>
+<td>CV</td>
+<td>Cycle</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>WiFi</td>
+<td>EI</td>
+<td>3层CNN</td>
+<td>FCN预测后与源数据一起送进鉴别器</td>
+<td>活动识别</td>
+<td></td>
+</tr>
+</tbody></table>
+<h4 id="Winect效果："><a href="#Winect效果：" class="headerlink" title="Winect效果："></a>Winect效果：</h4><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230306100318989.png" class="lazy" title="image-20230306100318989">
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230306100237721.png" class="lazy" title="image-20230306100237721">
+
+<h4 id="Meta-Pose效果："><a href="#Meta-Pose效果：" class="headerlink" title="Meta-Pose效果："></a>Meta-Pose效果：</h4><p>指标为12个节点的平均误差</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230302173330078.png" class="">
+
+
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230302173536263.png" class="lazy" title="image-20230302173536263">
+
+
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230302173627103.png" class="lazy" title="image-20230302173627103">
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230302173749838.png" class="lazy" title="image-20230302173749838">
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230302174514915.png" class="lazy" title="image-20230302174514915">
+
+
+
+<h4 id="Cycle-GAN"><a href="#Cycle-GAN" class="headerlink" title="Cycle GAN"></a>Cycle GAN</h4><p>陌生数据 + 想要的标准数据 &#x3D; 陌生数据在标准数据中的表示</p>
+<p>for example ：手机拍的照片 + 莫奈油画 &#x3D; 莫奈油画版本的手机拍的照片</p>
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/02/pose-cross-environment/image-20230304111230261.png" class="lazy" title="image-20230304111230261">
+
+
+
+<h3 id="还需要看的："><a href="#还需要看的：" class="headerlink" title="还需要看的："></a>还需要看的：</h3><ol>
+<li>引文11 12提到的对抗生成网络实现跨环境的论文</li>
+<li>引文9提到的自己之前的工作</li>
+</ol>
+
+
+<div class="article-footer reveal fs14"><section id="license"><div class="header"><span>许可协议</span></div><div class="body"><p>本文采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">署名-非商业性使用-相同方式共享 4.0 国际</a> 许可协议，转载请注明出处。</p>
+</div></section></div>
+
+</article>
+
+<div class="related-wrap reveal" id="read-next"><section class="body"><div class="item" id="prev"></div><div class="item" id="next"><div class="note">较早文章</div><a href="/2023/02/27/leetcode-142-%E7%8E%AF%E5%BD%A2%E9%93%BE%E8%A1%A8II/">leetcode-142-环形链表II</a></div></section></div>
+
+
+
+
+
+
+  <div class='related-wrap md-text reveal' id="comments">
+    <section class='header cmt-title cap theme'>
+      快来参与讨论吧
+    </section>
+    <section class='body cmt-body beaudar'>
+      
+
+<svg class="loading" style="vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2709"><path d="M832 512c0-176-144-320-320-320V128c211.2 0 384 172.8 384 384h-64zM192 512c0 176 144 320 320 320v64C300.8 896 128 723.2 128 512h64z" p-id="2710"></path></svg>
+
+<div id="beaudar" repo="ChiangGlonh/blog-comments" issue-term="pathname" theme="preferred-color-scheme" input-position="top" comment-order="desc" loading="false" branch="main"></div>
+
+    </section>
+  </div>
+
+
+
+      
+<footer class="page-footer reveal fs12"><hr><div class="text"><p>本站由 <a target="_blank" rel="noopener" href="https://github.com/ChiangGlonh">@ChiangGlonh</a> 创建，使用 <a target="_blank" rel="noopener" href="https://github.com/xaoxuu/hexo-theme-stellar">Stellar</a> 作为主题。<br>本博客所有文章除特别声明外，均采用 <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a> 许可协议，转载请注明出处。</p>
+</div></footer>
+
+      <div class='float-panel mobile-only blur' style='display:none'>
+  <button type='button' class='sidebar-toggle mobile' onclick='sidebar.toggle()'>
+    <svg class="icon" style="width: 1em; height: 1em;vertical-align: middle;fill: currentColor;overflow: hidden;" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="15301"><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 2.3 26.8 24.6 47.5 51.6 47.6h416.5v4z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15302"></path><path d="M566.407 808.3c26.9-0.1 49.3-20.8 51.6-47.6-1.9-27.7-23.9-49.7-51.6-51.6h-412.6c-28.2-1.4-52.6 19.5-55.5 47.6 1.9 27.7 23.9 49.7 51.6 51.6h416.5z m309.3-249.9c26.9-0.1 49.3-20.8 51.6-47.6-2.2-26.8-24.6-47.5-51.6-47.6h-721.9c-27.7-2.8-52.5 17.4-55.3 45.1-0.1 0.8-0.1 1.7-0.2 2.5 0.9 27.2 23.6 48.5 50.7 47.6H875.707z m-103.1-245.9c26.9-0.1 49.3-20.8 51.6-47.6-0.4-28.3-23.2-51.1-51.5-51.6h-618.9c-29.5-1.1-54.3 21.9-55.5 51.4v0.2c1.4 27.8 25.2 49.2 53 47.8 0.8 0 1.7-0.1 2.5-0.2h618.8z" p-id="15303"></path></svg>
+  </button>
+</div>
+
+    </div>
+  </div>
+  <div class='scripts'>
+    <script type="text/javascript">
+  const stellar = {
+    // 懒加载 css https://github.com/filamentgroup/loadCSS
+    loadCSS: (href, before, media, attributes) => {
+      var doc = window.document;
+      var ss = doc.createElement("link");
+      var ref;
+      if (before) {
+        ref = before;
+      } else {
+        var refs = (doc.body || doc.getElementsByTagName("head")[0]).childNodes;
+        ref = refs[refs.length - 1];
+      }
+      var sheets = doc.styleSheets;
+      if (attributes) {
+        for (var attributeName in attributes) {
+          if (attributes.hasOwnProperty(attributeName)) {
+            ss.setAttribute(attributeName, attributes[attributeName]);
+          }
+        }
+      }
+      ss.rel = "stylesheet";
+      ss.href = href;
+      ss.media = "only x";
+      function ready(cb) {
+        if (doc.body) {
+          return cb();
+        }
+        setTimeout(function () {
+          ready(cb);
+        });
+      }
+      ready(function () {
+        ref.parentNode.insertBefore(ss, before ? ref : ref.nextSibling);
+      });
+      var onloadcssdefined = function (cb) {
+        var resolvedHref = ss.href;
+        var i = sheets.length;
+        while (i--) {
+          if (sheets[i].href === resolvedHref) {
+            return cb();
+          }
+        }
+        setTimeout(function () {
+          onloadcssdefined(cb);
+        });
+      };
+      function loadCB() {
+        if (ss.addEventListener) {
+          ss.removeEventListener("load", loadCB);
+        }
+        ss.media = media || "all";
+      }
+      if (ss.addEventListener) {
+        ss.addEventListener("load", loadCB);
+      }
+      ss.onloadcssdefined = onloadcssdefined;
+      onloadcssdefined(loadCB);
+      return ss;
+    },
+
+    // 从 butterfly 和 volantis 获得灵感
+    loadScript: (src, opt) => new Promise((resolve, reject) => {
+      var script = document.createElement('script');
+      script.src = src;
+      if (opt) {
+        for (let key of Object.keys(opt)) {
+          script[key] = opt[key]
+        }
+      } else {
+        // 默认异步，如果需要同步，第二个参数传入 {} 即可
+        script.async = true
+      }
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    }),
+
+    // https://github.com/jerryc127/hexo-theme-butterfly
+    jQuery: (fn) => {
+      if (typeof jQuery === 'undefined') {
+        stellar.loadScript(stellar.plugins.jQuery).then(fn)
+      } else {
+        fn()
+      }
+    }
+  };
+  stellar.version = '1.18.5';
+  stellar.github = 'https://github.com/xaoxuu/hexo-theme-stellar/tree/1.18.5';
+  stellar.config = {
+    date_suffix: {
+      just: '刚刚',
+      min: '分钟前',
+      hour: '小时前',
+      day: '天前',
+      month: '个月前',
+    },
+  };
+
+  // required plugins (only load if needs)
+  stellar.plugins = {
+    jQuery: 'https://gcore.jsdelivr.net/npm/jquery@3.6.2/dist/jquery.min.js'
+  };
+
+  if ('local_search') {
+    stellar.search = {};
+    stellar.search.service = 'local_search';
+    if (stellar.search.service == 'local_search') {
+      let service_obj = Object.assign({}, {"field":"all","path":"/search.json","content":true,"sort":"-date"});
+      stellar.search[stellar.search.service] = service_obj;
+    }
+  }
+
+  // stellar js
+  stellar.plugins.stellar = Object.assign({"sites":"/js/plugins/sites.js","friends":"/js/plugins/friends.js","ghinfo":"/js/plugins/ghinfo.js","timeline":"/js/plugins/timeline.js","linkcard":"/js/plugins/linkcard.js","fcircle":"/js/plugins/fcircle.js","weibo":"/js/plugins/weibo.js"});
+
+  stellar.plugins.marked = Object.assign("https://cdn.bootcdn.net/ajax/libs/marked/4.0.18/marked.min.js");
+  // optional plugins
+  if ('true' == 'true') {
+    stellar.plugins.lazyload = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/vanilla-lazyload@17.8.3/dist/lazyload.min.js","transition":"blur"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.swiper = Object.assign({"enable":true,"css":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.css","js":"https://unpkg.com/swiper@8.4.5/swiper-bundle.min.js"});
+  }
+  if ('' == 'true') {
+    stellar.plugins.scrollreveal = Object.assign({"enable":null,"js":"https://gcore.jsdelivr.net/npm/scrollreveal@4.0.9/dist/scrollreveal.min.js","distance":"8px","duration":500,"interval":100,"scale":1});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.preload = Object.assign({"enable":true,"service":"flying_pages","instant_page":"https://gcore.jsdelivr.net/gh/volantis-x/cdn-volantis@4.1.2/js/instant_page.js","flying_pages":"https://gcore.jsdelivr.net/gh/gijo-varghese/flying-pages@2.1.2/flying-pages.min.js"});
+  }
+  if ('true' == 'true') {
+    stellar.plugins.fancybox = Object.assign({"enable":true,"js":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.umd.js","css":"https://gcore.jsdelivr.net/npm/@fancyapps/ui@4.0/dist/fancybox.css","selector":".swiper-slide img"});
+  }
+  if ('false' == 'true') {
+    stellar.plugins.heti = Object.assign({"enable":false,"css":"https://unpkg.com/heti@0.9.2/umd/heti.min.css","js":"https://unpkg.com/heti@0.9.2/umd/heti-addon.min.js"});
+  }
+</script>
+
+<!-- required -->
+
+  
+<script src="/js/main.js" async></script>
+
+
+
+<!-- optional -->
+
+  <script>
+  function loadBeaudar() {
+    const els = document.querySelectorAll("#comments #beaudar");
+    if (els.length === 0) return;
+    els.forEach((el, i) => {
+      try {
+        el.innerHTML = '';
+      } catch (error) {
+        console.log(error);
+      }
+      var script = document.createElement('script');
+      script.src = 'https://beaudar.lipk.org/client.js';
+      script.async = true;
+      for (let key of Object.keys(el.attributes)) {
+        let attr = el.attributes[key];
+        if (['class', 'id'].includes(attr.name) === false) {
+          script.setAttribute(attr.name, attr.value);
+        }
+      }
+      el.appendChild(script);
+    });
+  }
+  window.addEventListener('DOMContentLoaded', (event) => {
+      loadBeaudar();
+  });
+</script>
+
+
+
+
+<!-- inject -->
+
+
+  </div>
+<!-- hexo injector body_end start -->
+  <style>
+    .highlight {
+      position: relative;
+    }
+    .highlight .code .copy-btn{
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: 4px 0.5rem;
+      opacity: 0.25;
+      font-weight: 700;
+      color: var(--theme);
+      cursor: pointer;
+      transination: opacity 0.3s;
+    }
+    .highlight .code .copy-btn:hover{
+      color: var(--text-code);
+      opacity: 0.75;
+    }
+    .highlight .code .copy-btn.success {
+      color: var(--swiper-theme-color);
+      opacity: 0.75;
+
+    }
+    
+  </style>
+  <script>
+    const codeElementArr = document.querySelectorAll('.code')
+    codeElementArr.forEach(code => {
+      const codeBeforeWidth = window.getComputedStyle(code, '::before').width.split('px')[0]
+      const codeBeforePadding = window.getComputedStyle(code, '::before').padding.split(' ').pop().split('px')[0]
+  
+      // copy btn 
+      const codeCopyBtn = document.createElement('div')
+      codeCopyBtn.classList.add('copy-btn')
+      codeCopyBtn.style.right = Number(codeBeforeWidth) + Number(codeBeforePadding) * 2 + 'px'
+      codeCopyBtn.innerText = '复制代码'
+      code.appendChild(codeCopyBtn)
+  
+      codeCopyBtn.addEventListener('click', async () => {
+        const currentCodeElement = code.children[0]?.innerText
+        await copyCode(currentCodeElement)
+
+
+        codeCopyBtn.innerText = '复制成功'
+        codeCopyBtn.classList.add('success')
+
+        setTimeout(() => {
+          codeCopyBtn.innerText = '复制代码'
+          codeCopyBtn.classList.remove('success')
+        },1000)
+      })
+    })
+    
+    async function copyCode(currentCode) {
+      console.log(currentCode)
+      console.log('复制代码')
+      if (navigator.clipboard) {
+        try {
+          await navigator.clipboard.writeText(currentCode)
+        } catch (error) {
+          // 未获得用户许可
+          console.error(error)
+        }
+      } else {
+        console.error('当前浏览器不支持此api')
+      }
+    }
+  </script>
+  <!-- hexo injector body_end end --></body>
+</html>
