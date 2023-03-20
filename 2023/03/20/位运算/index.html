@@ -34,7 +34,7 @@
 <meta property="og:image" content="http://example.com/2023/03/20/%E4%BD%8D%E8%BF%90%E7%AE%97/ecfedf293145679ee9a2472f64c8d1d7.png">
 <meta property="og:image" content="http://example.com/2023/03/20/%E4%BD%8D%E8%BF%90%E7%AE%97/b7f2b4b2aae2b6f7f8121e3c5bf49ee5.png">
 <meta property="article:published_time" content="2023-03-20T11:25:48.000Z">
-<meta property="article:modified_time" content="2023-03-20T11:43:52.236Z">
+<meta property="article:modified_time" content="2023-03-20T11:46:50.493Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta property="article:tag" content="Java">
 <meta name="twitter:card" content="summary">
@@ -143,6 +143,10 @@
 <p>可以得到运算结果为：00000000 00000000 00000000 00000000。结果为0。</p>
 <h5 id="或运算"><a href="#或运算" class="headerlink" title="或运算"></a>或运算</h5><p>两个数相同位置的比特进行或运算，若其中一个为1则结果为1，否个结果为0。</p>
 <h5 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h5><p>两个数相同位置的比特进行或运算，若两个数均为0或1，则结果为0，否者为1。</p>
+<h6 id="用例"><a href="#用例" class="headerlink" title="用例"></a>用例</h6><ol>
+<li><p>在Leetcode334反转字符串的时候，发现可以用三行异或来交换两个位置的字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">s[l] ^= s[r];  <span class="comment">//构造 a ^ b 的结果，并放在 a 中</span></span><br><span class="line">      s[r] ^= s[l];  <span class="comment">//将 a ^ b 这一结果再 ^ b ，存入b中，此时 b = a, a = a ^ b</span></span><br><span class="line">      s[l] ^= s[r];  <span class="comment">//a ^ b 的结果再 ^ a ，存入 a 中，此时 b = a, a = b 完成交换</span></span><br></pre></td></tr></table></figure></li>
+</ol>
 <h5 id="取反运算"><a href="#取反运算" class="headerlink" title="取反运算"></a>取反运算</h5><p>若位数为0，则取反后为1，若为1，取反后为0。</p>
 <h4 id="位移操作"><a href="#位移操作" class="headerlink" title="位移操作"></a>位移操作</h4><h5 id="左移"><a href="#左移" class="headerlink" title="左移"></a>左移</h5><p>规则：符号位不变，高位溢出截断，低位补零。比如 -1 &lt;&lt; 2 &#x3D; -4 。</p>
 <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAABGdBTUEAALGPC/xhBQAAADhlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAAqACAAQAAAABAAAAAaADAAQAAAABAAAAAQAAAADa6r/EAAAAC0lEQVQIHWNgAAIAAAUAAY27m/MAAAAASUVORK5CYII=" data-src="/2023/03/20/%E4%BD%8D%E8%BF%90%E7%AE%97/4ef021927293f3556ddc90680103acca.png" class="lazy" title="img">
