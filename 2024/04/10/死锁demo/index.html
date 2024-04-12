@@ -23,18 +23,19 @@
   <title>死锁demo - Glonh's blog</title>
 
   
-    <meta name="description" content="模拟死锁的场景，并分析产生的原因，以及如何破坏">
+    <meta name="description" content="模拟死锁的场景，并分析产生的原因，以及如何破坏(补充了死锁的定义、如何检测死锁等)">
 <meta property="og:type" content="article">
 <meta property="og:title" content="死锁demo">
 <meta property="og:url" content="http://example.com/2024/04/10/%E6%AD%BB%E9%94%81demo/index.html">
 <meta property="og:site_name" content="Glonh&#39;s blog">
-<meta property="og:description" content="模拟死锁的场景，并分析产生的原因，以及如何破坏">
+<meta property="og:description" content="模拟死锁的场景，并分析产生的原因，以及如何破坏(补充了死锁的定义、如何检测死锁等)">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-10T07:06:54.000Z">
-<meta property="article:modified_time" content="2024-04-10T07:16:15.436Z">
+<meta property="article:modified_time" content="2024-04-12T12:25:03.356Z">
 <meta property="article:author" content="Glonh Chiang">
 <meta property="article:tag" content="算法题">
 <meta property="article:tag" content="Java">
+<meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
   
   
@@ -84,9 +85,7 @@
 <widget class="widget-wrapper search"><div class="widget-body"><div class="search-wrapper" id="search"><form class="search-form"><input type="text" class="search-input" id="search-input" data-filter="/blog/" placeholder="文章搜索"><svg t="1670596976048" class="icon search-icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2676" width="200" height="200"><path d="M938.2 832.6L723.8 618.1c-2.5-2.5-5.3-4.4-7.9-6.4 36.2-55.6 57.3-121.8 57.3-193.1C773.3 222.8 614.6 64 418.7 64S64 222.8 64 418.6c0 195.9 158.8 354.6 354.6 354.6 71.3 0 137.5-21.2 193.2-57.4 2 2.7 3.9 5.4 6.3 7.8L832.5 938c14.6 14.6 33.7 21.9 52.8 21.9 19.1 0 38.2-7.3 52.8-21.8 29.2-29.1 29.2-76.4 0.1-105.5M418.7 661.3C284.9 661.3 176 552.4 176 418.6 176 284.9 284.9 176 418.7 176c133.8 0 242.6 108.9 242.6 242.7 0 133.7-108.9 242.6-242.6 242.6" p-id="2677"></path></svg></form><div id="search-result"></div><div class="search-no-result">没有找到内容！</div></div></div></widget>
 
 
-
-<widget class="widget-wrapper recent"><div class="widget-header cap theme dis-select"><span class="name">最近更新</span></div><div class="widget-body related-posts fs14"><a class="item title" href="/2024/04/03/%E5%B8%B8%E7%94%A8%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"><span class="title">常用设计模式</span></a><a class="item title" href="/2024/04/10/%E6%AD%BB%E9%94%81demo/"><span class="title">死锁demo</span></a><a class="item title" href="/2024/04/10/%E5%A4%9A%E7%BA%BF%E7%A8%8B%E6%89%93%E5%8D%B0%E5%A5%87%E5%81%B6/"><span class="title">多线程打印奇偶</span></a><a class="item title" href="/2024/04/03/%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E/"><span class="title">使用说明</span></a><a class="item title" href="/2023/04/18/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/"><span class="title">排序算法</span></a></div></widget>
-
+<widget class="widget-wrapper toc single" id="data-toc"><div class="widget-header cap dis-select"><span class="name">死锁demo</span></div><div class="widget-body fs14"><div class="doc-tree active"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%AD%BB%E9%94%81%EF%BC%9F"><span class="toc-text">什么是死锁？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E6%AD%BB%E9%94%81"><span class="toc-text">模拟死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E6%A3%80%E6%B5%8B%E6%AD%BB%E9%94%81"><span class="toc-text">如何检测死锁</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E9%81%BF%E5%85%8D%E6%AD%BB%E9%94%81"><span class="toc-text">如何避免死锁</span></a></li></ol></div></div></widget>
 
 
 
@@ -101,16 +100,17 @@
       
 
 
-<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/%E7%AE%97%E6%B3%95%E9%A2%98/">算法题</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-04-10T07:06:54.000Z">2024-04-10</time></div></div>
+<div class="bread-nav fs12"><div id="breadcrumb"><a class="cap breadcrumb" href="/">主页</a><span class="sep"></span><a class="cap breadcrumb" href="/">文章</a><span class="sep"></span><a class="cap breadcrumb-link" href="/categories/Java/">Java</a></div><div id="post-meta">发布于&nbsp;<time datetime="2024-04-10T07:06:54.000Z">2024-04-10</time></div></div>
 
 <article class='md-text content post'>
 <h1 class="article-title"><span>死锁demo</span></h1>
 <blockquote>
-<p> 模拟死锁的场景，并分析产生的原因，以及如何破坏</p>
+<p> 模拟死锁的场景，并分析产生的原因，以及如何破坏(补充了死锁的定义、如何检测死锁等)</p>
 </blockquote>
 <span id="more"></span>
 
-<p>首先是一个死锁的例子</p>
+<h3 id="什么是死锁？"><a href="#什么是死锁？" class="headerlink" title="什么是死锁？"></a>什么是死锁？</h3><p>线程死锁描述的是这样一种情况：多个线程同时被阻塞，它们中的一个或者全部都在等待某个资源被释放。由于线程被无限期地阻塞，因此程序不可能正常终止。</p>
+<h3 id="模拟死锁"><a href="#模拟死锁" class="headerlink" title="模拟死锁"></a>模拟死锁</h3><p>首先是一个死锁的例子</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeadLockDemo</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">Object</span> <span class="variable">resource2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Object</span>();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    ;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程1&quot;</span>).start();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Thread</span>(() -&gt; &#123;</span><br><span class="line">            <span class="keyword">synchronized</span> (resource2) &#123;</span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;get resource1&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">try</span> &#123;</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                &#125; <span class="keyword">catch</span> (InterruptedException e) &#123;</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                    ;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                System.out.println(Thread.currentThread().getName() + <span class="string">&quot;waiting get resource2&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">synchronized</span> (resource1) &#123;</span><br><span class="line">                    System.out.println(Thread.currentThread().getName() + <span class="string">&quot;get resource2&quot;</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;, <span class="string">&quot;线程2&quot;</span>).start();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>输出如下：</p>
@@ -118,7 +118,14 @@
 
 <p>分析：线程<code>A</code>通过<code>synchronized (resource1)</code>获得<code>resource1</code>的监视器锁，然后通过<code>Thread.sleep(1000)</code>; 让<code>线程 A</code>休眠 1s 为的是让线程<code>B</code>得到执行然后获取到<code>resource2</code>的监视器锁。线程<code>A</code>和线程<code>B</code>休眠结束了都开始企图请求获取对方的资源，然后这两个线程就会陷入互相等待的状态，这也就产生了<code>死锁</code>。</p>
 <p>死锁的四个必要条件：<br>1、互斥条件：资源任意一个时刻只由一个线程占用。<br>2、请求与保持条件：一个线程因请求资源而阻塞时，对已获得的资源保持不放。<br>3、不剥夺条件:线程已获得的资源在未使用完之前不能被其他线程强行剥夺，只有自己使用完毕后 才释放资源。<br>4、循环等待条件:若干线程之间形成一种头尾相接的循环等待资源关系。</p>
-<p>如何避免：破坏其中一个条件就好了：</p>
+<h3 id="如何检测死锁"><a href="#如何检测死锁" class="headerlink" title="如何检测死锁"></a>如何检测死锁</h3><ol>
+<li><p>使用jmap、jstack等命令查看 JVM 线程栈和堆内存的情况。如果有死锁，jstack 的输出中通常会有 Found one Java-level deadlock:的字样，后面会跟着死锁相关的线程信息。另外，实际项目中还可以搭配使用top、df、free等命令查看操作系统的基本情况，出现死锁可能会导致CPU、内存等资源消耗过高。</p>
+</li>
+<li><p>采用 VisualVM、JConsole 等工具进行排查。</p>
+</li>
+</ol>
+<p>mac直接进入JDK的bin目录，运行jconsole，连接对应的程序，然后进入线程界面选择检测死锁即可！</p>
+<h3 id="如何避免死锁"><a href="#如何避免死锁" class="headerlink" title="如何避免死锁"></a>如何避免死锁</h3><p><strong>破坏其中一个条件就好了：</strong></p>
 <p>1、破坏请求与保持条件:一次性申请所有的资源。<br>2、破坏不剥夺条件:占用部分资源的线程进一步申请其他资源时，如果申请不到，可以主动释放<br>它占有的资源。<br>3、破坏循环等待条件:靠按序申请资源来预防。按某一顺序申请资源，释放资源则反序释放。破坏循环等待条件。</p>
 <p>一般来说可以在分配资源的时候使用银行家算法来避免死锁，其在资源分配前进行估算，避免进入死锁状态。</p>
 <p>本例中直接修改线程2的代码：</p>
